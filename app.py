@@ -4,8 +4,16 @@ import json, os
 st.set_page_config(page_title="오늘의 유튜브 랭킹", page_icon="📺", layout="wide")
 st.title("📺 오늘의 유튜브 랭킹 TOP 50")
 
+# 두 위치 모두 확인
 if os.path.exists("data/latest.json"):
-    with open("data/latest.json", "r", encoding="utf-8") as f:
+    file_path = "data/latest.json"
+elif os.path.exists("latest.json"):
+    file_path = "latest.json"
+else:
+    file_path = None
+
+if file_path:
+    with open(file_path, "r", encoding="utf-8") as f:
         for item in json.load(f):
             col1, col2 = st.columns([1, 4])
             with col1:
